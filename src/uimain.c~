@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include"tokenizer.h"
+#include"history.h"
+#define MAX 1024
+
+int main(){
+  char userInput[MAX];
+  char** tokens;
+  List *history = init_history();
+  puts("> h = history, != specific history, q = quit");
+  do{
+    printf(">");
+    fgets(userInput, MAX, stdin);
+    printf("String typed : %s", userInput);
+    tokens = tokenize(userInput);
+    print_tokens(tokens);
+    add_history( history, userInput);
+    if(userInput[0] == 'h'){
+      print_history(history);
+    }
+    else if(userInput[0] == '!'){
+      char *h = get_history(history, atoi(userInput+1));
+      char **h_tokens = tokenize(h);
+      printf("History: %s\n", h);
+      printf("Tokenized history:\n");
+      print_tokens(h_tokens);
+      free_tokens(h_tokens);
+    }
+  }while (userInput[0] != 'q' && userInput[0]);
+  return 0;
+}
