@@ -21,6 +21,9 @@ char *word_start(char *word){
   while(space_char(*word)){
     word++;
   }
+  if(*word == '\0'){
+    return 0;
+  }
   return word;
 }
 
@@ -36,6 +39,9 @@ int count_words(char *str){
   int count = 0;
   while(*str != '\0'){
     str = word_start(str);
+    if(str == 0){
+      return count;
+    }
     str = word_terminator(str);
     count++;
   }

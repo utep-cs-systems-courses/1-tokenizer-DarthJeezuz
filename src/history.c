@@ -22,14 +22,16 @@ void add_history(List *list, char *str){
     list->root=new;
     new->id=1;
   }
+  
   else{
     Item *temp = list->root;
+    new->id = 1;
     while(temp->next != NULL){
       new->id += 1;
       temp = temp->next;
     }
     temp->next = new;
-    new->id += 1;
+    new->id += 1;  
   }
 }
 
